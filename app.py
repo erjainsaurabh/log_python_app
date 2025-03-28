@@ -9,7 +9,7 @@ from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 trace.set_tracer_provider(TracerProvider(resource=Resource.create({SERVICE_NAME: "python-app"})))
 tracer = trace.get_tracer(__name__)
 
-otlp_exporter = OTLPSpanExporter(endpoint="http://otel-collector:4318/v1/traces")
+otlp_exporter = OTLPSpanExporter(endpoint="http://otel-collector.observability.svc.cluster.local:4318/v1/traces")
 trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(otlp_exporter))
 
 app = Flask(__name__)
